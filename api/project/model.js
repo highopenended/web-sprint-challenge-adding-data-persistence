@@ -2,9 +2,7 @@ const db = require("../../data/dbConfig");
 
 
 async function getProjects() {
-
     const projects = await db('projects');
-
     const projectsWithDetails = await Promise.all(
       projects.map(async (project) => {
 
@@ -34,7 +32,10 @@ async function addProject(project) {
     const newProject = await db('projects')
       .where('project_id', project_id.id)
       .first();  
-    return newProject;
+    return {
+        ...newProject,
+        project_completed:!!newProject.project_completed
+    };
   }
 
 module.exports = { 

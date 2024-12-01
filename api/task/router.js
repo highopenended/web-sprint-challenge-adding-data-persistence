@@ -12,7 +12,7 @@ router.get('/', async (req,res,next)=>{
 })
 
 // POST: Tasks
-router.post('/tasks', async (req, res) => {
+router.post('/', async (req, res) => {
     const { task_description, task_notes, task_completed, project_id } = req.body;
   
     // Validate input

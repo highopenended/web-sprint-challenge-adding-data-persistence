@@ -9,6 +9,7 @@ async function getTasks() {
         'tasks.task_notes',
         'tasks.task_completed',
         'projects.project_name',
+        'projects.project_description',
         'tasks.project_id'
       );
     return tasks.map(task => ({

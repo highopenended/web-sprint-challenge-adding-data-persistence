@@ -12,7 +12,7 @@ router.get('/', async (req,res,next)=>{
 })
 
 // POST: Resources
-router.post('/resources', async (req, res) => {
+router.post('/', async (req, res) => {
     const { resource_name, resource_description } = req.body;
   
     if (!resource_name) {

@@ -12,22 +12,25 @@ router.get("/", async (req, res, next) => {
 });
 
 // POST: Projects
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
     const { project_name, project_description, project_completed } = req.body;
+  
     if (!project_name) {
-        return res.status(400).json({ message: "Project name is required" });
+      return res.status(400).json({ message: 'Project name is required' });
     }
+  
     try {
-        const newProject = await Project.addProject({
-            project_name,
-            project_description: project_description,
-            project_completed:project_completed,
-        });
-        return res.status(201).json(newProject);
+      const newProject = await Project.addProject({
+        project_name,
+        project_description,
+        project_completed: project_completed === undefined ? false : project_completed, // Default to false if not provided
+      });
+  
+      res.status(201).json(newProject);
     } catch (err) {
-        res.status(500).json({ message: "Error adding project to the database" });
+      res.status(500).json({ message: 'Error adding project to the database' });
     }
-});
+  });
 
 router.use((err, req, res, next) => {
     res.status(500).json({
