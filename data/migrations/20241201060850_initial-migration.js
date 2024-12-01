@@ -1,5 +1,5 @@
 exports.up = async function (knex) {
-    console.log('making it')
+    console.log("making it");
     await knex.schema
 
         // Projects Table
@@ -31,7 +31,7 @@ exports.up = async function (knex) {
                 .inTable("projects")
                 .onDelete("CASCADE"); // Ensures related tasks are deleted if project is deleted
         })
-        
+
         // Project Resources Table
         .createTable("project_resources", (table) => {
             table.increments("id"); // Primary key

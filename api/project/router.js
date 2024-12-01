@@ -12,26 +12,27 @@ router.get("/", async (req, res, next) => {
 });
 
 // POST: Projects
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
     const { project_name, project_description, project_completed } = req.body;
-  
-    if (!project_name) {
-      return res.status(400).json({ message: 'Project name is required' });
-    }
-  
-    try {
-      const newProject = await Project.addProject({
-        project_name,
-        project_description,
-        project_completed: project_completed === undefined ? false : project_completed, // Default to false if not provided
-      });
-  
-      res.status(201).json(newProject);
-    } catch (err) {
-      res.status(500).json({ message: 'Error adding project to the database' });
-    }
-  });
 
+    if (!project_name) {
+        return res.status(400).json({ message: "Project name is required" });
+    }
+
+    try {
+        const newProject = await Project.addProject({
+            project_name,
+            project_description,
+            project_completed: project_completed === undefined ? false : project_completed, // Default to false if not provided
+        });
+
+        res.status(201).json(newProject);
+    } catch (err) {
+        res.status(500).json({ message: "Error adding project to the database" });
+    }
+});
+
+// eslint-disable-next-line no-unused-vars
 router.use((err, req, res, next) => {
     res.status(500).json({
         customMessage: "something went wrong inside the Project router",
